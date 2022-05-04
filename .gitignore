@@ -164,3 +164,11 @@ tags
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/go,vim,goland+all,visualstudiocode
+
+# Air tmp folder and config
+tmp
+
+**/*.air*
+
+# Built binary
+web-service
