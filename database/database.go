@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/fitnessstack/web-service/model"
+	"github.com/fitnessstack/web-service/model/entity"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"log"
@@ -22,7 +22,7 @@ func ConnectDatabase() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = DBConn.AutoMigrate(&model.Workout{}, &model.Muscle{})
+	err = DBConn.AutoMigrate(&entity.Workout{}, &entity.Muscle{})
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,4 +1,4 @@
-package model
+package entity
 
 import (
 	guuid "github.com/google/uuid"
