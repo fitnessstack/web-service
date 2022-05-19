@@ -1,150 +1,322 @@
 @startuml
-entity user {
-    * id : uuid
-    --
+package "price_watch" {
+    entity price_audit {
+        * id : uuid
+        --
 
-    * name : text
+        * price : double
+        * date : long
+    }
+}
+package "products" {
+    entity article {
+        * id : uuid
+        --
 
-    --
-    created_at : long
-    updated_at : long
-    deleted_at : long
-}
-entity weight {
-    * date : long
-    * amount : double
-}
-entity measurement {
-    * amount
-    * date
-}
-entity user_badge {
-    * date
-}
-entity badge {
-    * name : text
-    * description : text
-    * image : text
-}
-entity theme {
-    * name : text
-}
-entity language {
-    * name : text
-}
-enum units {
-    weight_unit : text
-}
-enum weight_unit {
-    kilogram : text
-    pound : text
-}
-enum distance_unit {
-    meter : text
-    feet : text
-}
-enum size_unit {
-    centimeter : text
-    inch : text
-}
-enum first_weekday {
-    monday : text
-    sunday : text
-    saturday : text
-}
-entity workout {
-    * id : uuid
-    --
+        * name : text
+        * barcode : text
+    }
+    entity category {
+        * id : uuid
+        --
 
-    * name : text
-
-    --
-    created_at : long
-    updated_at : long
-    deleted_at : long
+        * name : text
+    }
 }
 
-entity workout_date {
-    * id : uuid
-    --
+package "gyms" {
+     entity gym {
+        * id : uuid
+        --
 
-    * date : date
-    * started_at : time
-    * ended_at : time
-
-    --
-    created_at : long
-    updated_at : long
-    deleted_at : long
-}
-entity completed_exercise {
-    * id : uuid
-    --
-
-    * note : text
-
-    --
-    created_at : long
-    updated_at : long
-    deleted_at : long
-}
-entity exercise {
-    * id : uuid
-    --
-
-    * name : text
-    * instructions : text
-    * video_url : text
-    * image : text
-
-    --
-    created_at : long
-    updated_at : long
-    deleted_at : long
+        * name : text
+        * place : text
+        * coordinates : text
+        * ip_address : text
+    }
+    note left of gym::coordinates
+        so that we can see if the range
+        (coordinate log user)
+        in which a user is located is
+        approximately equal to these
+        coordinates
+    end note
 }
 
-entity muscle {
-    * id : uuid
-    --
+package "Social" {
+    entity music_playlist {
+        * id : uuid
+        --
 
-    * name : text
+        url : text
+    }
+    entity gym_membership {
+        * id : uuid
+        --
 
-    --
-    created_at : long
-    updated_at : long
-    deleted_at : long
+        * present_since : long
+        * cancellation_date : long
+    }
+    entity supplement {
+        * id : uuid
+        --
+
+        * note : text
+    }
+    entity follower {
+        * id : uuid
+        --
+
+        * date : long
+    }
+
+    entity gym_buddy {
+        * id : uuid
+        --
+
+        * date: long
+    }
+
+    entity reaction {
+        * id : uuid
+        --
+
+
+    }
 }
-entity reps {
-    * id : uuid
-    --
 
-    * set : int
-    * weight_amount : int
-    * reps : int
 
-    --
-    created_at : long
-    updated_at : long
-    deleted_at : long
+package "Auth API" {
+    entity credential {
+        * id : uuid
+        --
+
+        * password
+
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+    entity role {
+
+    }
+    entity permission {
+
+    }
+
+    entity login_log {
+        * id : uuid
+        --
+
+        * ip: text
+        * password : text
+        * browser : text
+        * success : text
+    }
 }
-entity body_part {
-    * id : uuid
-    __
 
-    * name : text
 
-    --
-    created_at : long
-    updated_at : long
-    deleted_at : long
+package "User API" {
+    entity location_log {
+        * id : uuid
+        --
+
+        coordinates: text
+
+        --
+        created_at : long
+    }
+    entity user {
+        * id : uuid
+        --
+
+        * first_name : text
+        * last_name : text
+        * bio : text
+        * avatar : text
+        * length : double
+        * gender : text
+
+        * email : text
+        * phone_number : text
+        * city : text
+        * pin_code : text
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+    entity weight {
+        * date : long
+        * amount : double
+    }
+    entity measurement {
+        * amount
+        * date
+    }
+    entity user_badge {
+        * date
+    }
+    entity badge {
+        * name : text
+        * description : text
+        * image : text
+    }
+    entity theme {
+        * name : text
+    }
+    entity language {
+        * name : text
+    }
+    enum units {
+        weight_unit : text
+    }
+    enum weight_unit {
+        kilogram : text
+        pound : text
+    }
+    enum distance_unit {
+        meter : text
+        feet : text
+    }
+    enum size_unit {
+        centimeter : text
+        inch : text
+    }
+    enum first_weekday {
+        monday : text
+        sunday : text
+        saturday : text
+    }
 }
+package "Workout API"{
+    entity workout {
+        * id : uuid
+        --
+
+        * name : text
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+
+    entity workout_date {
+        * id : uuid
+        --
+
+        * date : date
+        * started_at : time
+        * ended_at : time
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+    entity completed_exercise {
+        * id : uuid
+        --
+
+        * note : text
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+    entity exercise {
+        * id : uuid
+        --
+
+        * name : text
+        * instructions : text
+        * video_url : text
+        * image : text
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+
+    entity muscle {
+        * id : uuid
+        --
+
+        * name : text
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+    entity reps {
+        * id : uuid
+        --
+
+        * set : int
+        * weight_amount : int
+        * reps : int
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+    entity body_part {
+        * id : uuid
+        __
+
+        * name : text
+
+        --
+        created_at : long
+        updated_at : long
+        deleted_at : long
+    }
+}
+'PriceWatch
+price_audit }|..|| gym
+price_audit }|..|| article
+
+'Gym
+
+'Product
+article }|..|| category
+article }|..|{ gym
+
+'Social
+user ||..|{ follower
+user ||..|{ gym_buddy
+user ||..|{ supplement
+user ||..|{ reaction
+user ||..|{ music_playlist
+music_playlist }|..|{ reaction
+workout_date }|..|{ reaction
+supplement }|..|{ reaction
+supplement ||..|| article
+gym_buddy }|..|| workout_date
+gym_membership ||..|| gym
+gym_membership }|..|| user
+
+'User
+user }|..|| language
 user ||..|{ measurement
+user ||..|{ weight
+user ||..|{ workout
+user ||..|{ location_log
+
 measurement }|..|| body_part
 body_part ||..|{ muscle
-user ||..|{ weight
+
 user_badge }|..|| badge
 user_badge }|..|| user
-user ||..|{ workout
+
 workout ||..|{ workout_date
 workout ||..|{ exercise
 workout_date ||..|{ completed_exercise

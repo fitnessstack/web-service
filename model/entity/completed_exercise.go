@@ -8,8 +8,10 @@ type CompletedExercise struct {
 	// Keys
 	ExerciseId    uuid.UUID
 	WorkoutDateId uuid.UUID
+	Reps          []Rep
 
 	// Data variables
-	Note string `json:"note"'`
-	Reps string `json:"reps"`
+	Note        string `json:"note"'`
+	Exercise    Exercise
+	WorkoutDate WorkoutDate
 }

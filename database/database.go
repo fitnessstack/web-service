@@ -30,6 +30,8 @@ func ConnectDatabase() {
 		&entity.Muscle{},
 		&entity.CompletedExercise{},
 		&entity.WorkoutDate{},
+		&entity.Rep{},
+		&entity.BodyPart{},
 	)
 	if err != nil {
 		log.Fatal(err)

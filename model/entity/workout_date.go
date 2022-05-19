@@ -13,4 +13,5 @@ type WorkoutDate struct {
 	Date      string `json:"date"'`
 	StartedAt string `json:"started_at"`
 	EndedAt   string `json:"ended_at"`
+	Workout   Workout
 }
