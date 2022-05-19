@@ -1,0 +1,154 @@
+@startuml
+entity user {
+    * id : uuid
+    --
+
+    * name : text
+
+    --
+    created_at : long
+    updated_at : long
+    deleted_at : long
+}
+entity weight {
+    * date : long
+    * amount : double
+}
+entity measurement {
+    * amount
+    * date
+}
+entity user_badge {
+    * date
+}
+entity badge {
+    * name : text
+    * description : text
+    * image : text
+}
+entity theme {
+    * name : text
+}
+entity language {
+    * name : text
+}
+enum units {
+    weight_unit : text
+}
+enum weight_unit {
+    kilogram : text
+    pound : text
+}
+enum distance_unit {
+    meter : text
+    feet : text
+}
+enum size_unit {
+    centimeter : text
+    inch : text
+}
+enum first_weekday {
+    monday : text
+    sunday : text
+    saturday : text
+}
+entity workout {
+    * id : uuid
+    --
+
+    * name : text
+
+    --
+    created_at : long
+    updated_at : long
+    deleted_at : long
+}
+
+entity workout_date {
+    * id : uuid
+    --
+
+    * date : date
+    * started_at : time
+    * ended_at : time
+
+    --
+    created_at : long
+    updated_at : long
+    deleted_at : long
+}
+entity completed_exercise {
+    * id : uuid
+    --
+
+    * note : text
+
+    --
+    created_at : long
+    updated_at : long
+    deleted_at : long
+}
+entity exercise {
+    * id : uuid
+    --
+
+    * name : text
+    * instructions : text
+    * video_url : text
+    * image : text
+
+    --
+    created_at : long
+    updated_at : long
+    deleted_at : long
+}
+
+entity muscle {
+    * id : uuid
+    --
+
+    * name : text
+
+    --
+    created_at : long
+    updated_at : long
+    deleted_at : long
+}
+entity reps {
+    * id : uuid
+    --
+
+    * set : int
+    * weight_amount : int
+    * reps : int
+
+    --
+    created_at : long
+    updated_at : long
+    deleted_at : long
+}
+entity body_part {
+    * id : uuid
+    __
+
+    * name : text
+
+    --
+    created_at : long
+    updated_at : long
+    deleted_at : long
+}
+user ||..|{ measurement
+measurement }|..|| body_part
+body_part ||..|{ muscle
+user ||..|{ weight
+user_badge }|..|| badge
+user_badge }|..|| user
+user ||..|{ workout
+workout ||..|{ workout_date
+workout ||..|{ exercise
+workout_date ||..|{ completed_exercise
+muscle }|..|{ exercise
+completed_exercise }|..|| exercise
+completed_exercise ||..|{ reps
+@enduml
